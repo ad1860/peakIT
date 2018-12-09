@@ -1,0 +1,90 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - SearchContext
+        - MagentoapiContext
+  formatters:
+    pretty:
+    junit:
+    html:
+      output_path: %paths.base%/report
+
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2:
+        browser: chrome
+        capabilities:
+          chrome:
+            switches:
+#              - "start-fullscreen"
+              - "start-maximized"
+#              - "no-sandbox"
+      base_url: 'https://www.google.com'
+    SensioLabs\Behat\PageObjectExtension:
+      namespaces:
+        page: [Acme\Features\Context\Page, Acme\Page]
+        element: [Acme\Features\Context\Page\Element, Acme\Page\Element]
+
+    elkan\BehatFormatter\BehatFormatterExtension:
+      projectName: PeakIT
+      name: html
+      renderer: Behat2
+      print_args: true
+      print_outp: true
+      loop_break: true
+      show_tags: true
+
+    jarnaiz\JUnitFormatter\JUnitFormatterExtension:
+      filename: index.xml
+      outputDir: %paths.base%/report
+
+nexcess:
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'http://magento2-demo.nexcess.net/'
+    SensioLabs\Behat\PageObjectExtension:
+      factory:
+        page_parameters:
+          base_url: 'http://magento2-demo.nexcess.net/'
+          admin: 'http://magento2-demo.nexcess.net/'
+          country: 'us'
+          files_path: %paths.base%/features/bootstrap/Data
+
+nublue:
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'https://magento.nublue.co.uk/'
+    SensioLabs\Behat\PageObjectExtension:
+      factory:
+        page_parameters:
+          base_url: 'https://magento.nublue.co.uk/'
+          admin: 'https://magento.nublue.co.uk/backend/admin/index/index/'
+          country: 'uk'
+          files_path: %paths.base%/features/bootstrap/Data
+
+bird:
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'http://demo-acm2.bird.eu/'
+    SensioLabs\Behat\PageObjectExtension:
+      factory:
+        page_parameters:
+          base_url: 'http://demo-acm2.bird.eu/'
+          admin: 'http://demo-acm2.bird.eu/'
+          country: 'eu'
+          files_path: %paths.base%/features/bootstrap/Data
+
+demo:
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'https://demo1-m2.mage.direct/'
+    SensioLabs\Behat\PageObjectExtension:
+      factory:
+        page_parameters:
+          base_url: 'https://demo1-m2.mage.direct/'
+          admin: 'https://demo1-m2.mage.direct/admin/admin/dashboard'
+          country: 'eu'
+          files_path: %paths.base%/features/bootstrap/Data
